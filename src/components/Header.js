@@ -14,8 +14,8 @@ const Header = ({user, tokens}) => {
 
 Header.defaultProps = {
     text: "This is default text",
-    user: "Default Name",
-    tokens: 69,
+    user: "not logged in user",
+    tokens: 0,
     
 }
 

@@ -12,7 +12,7 @@ console.log("SendRequestPage.js");
 
 const SeatRequestPage = () => {
 
-    const [userTokenCount, setUserTokenCount] = useState('')
+    const [userTokenCount, setUserTokenCount] = useState('0')
     const [userDisplayname, setUserDisplayname] = useState("not logged in user")
     const auth = getAuth()
     const db = getFirestore()

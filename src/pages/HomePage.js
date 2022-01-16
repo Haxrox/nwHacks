@@ -49,7 +49,7 @@ const Home = () => {
     }
 
     
-    const [userTokenCount, setUserTokenCount] = useState('')
+    const [userTokenCount, setUserTokenCount] = useState('0')
     var userDisplayname = "not logged in user"
     const auth = getAuth()
     const db = getFirestore()
