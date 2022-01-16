@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import {UpdateDocument} from '../firebase.js';
+import { deleteField, getFirestore, doc, updateDoc, increment } from 'firebase/firestore';
 
 const ConfirmCancelSeatTransferPage = () => {
     
