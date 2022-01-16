@@ -1,0 +1,73 @@
+{
+    "Name": "IKB",
+    "Configuration": {
+        "Location": {
+            "Latitude": 49.2675221,
+            "Longitude": -123.2548868
+        },
+        "Floors": [
+            {
+                "Name": "First Floor",
+                "Map": "",
+                "Seats": [
+                    {
+                        "Occupied": false,
+                        "x": 0,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 5,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 10,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 15,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 20,
+                        "y": 0 
+                    }
+                ]
+            },
+            {
+                "Name": "Second Floor",
+                "Map": "",
+                "Seats": [
+                    {
+                        "Occupied": false,
+                        "x": 0,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 5,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 10,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 15,
+                        "y": 0 
+                    },
+                    {
+                        "Occupied": false,
+                        "x": 20,
+                        "y": 0 
+                    }
+                ]
+            }
+        ]
+    }   
+}

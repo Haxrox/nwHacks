@@ -1,0 +1,22 @@
+{
+    "Name": "",
+    "Configuration": {
+        "Location": {
+            "Latitude": 0,
+            "Longitude": 0
+        },
+        "Floors": [
+            {
+                "Name": "",
+                "Map": "",
+                "Seats": [
+                    {
+                        "Occupied": false,
+                        "x": 0,
+                        "y": 0 
+                    }
+                ]
+            }
+        ]
+    }   
+}
