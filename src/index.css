@@ -16,7 +16,6 @@ code {
 
 .font-link {
   font-family: 'Mukta', sans-serif;
-  font-weight: 600;
 }
 
 .font-link-huge-time {
@@ -90,4 +89,13 @@ code {
 
 .card{
   box-shadow: 5px 5px rgba(0,0,0,.15);
+}
+
+.full-width-btn{
+  width: 100%;
+  font-weight: bold;
+}
+
+.info-announcement{
+  margin: 20px;
 }

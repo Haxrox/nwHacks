@@ -7,6 +7,11 @@ import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from
 import React, { useState } from "react";
 import { getAuth } from 'firebase/auth';
 import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { FaRedo } from "react-icons/fa";
+
 
 var id = 0;
 console.log("SendRequestPage.js");
@@ -89,15 +94,25 @@ const SeatRequestPage = () => {
         <div>
             <Header tokens={userTokenCount} user={userDisplayname}/>
             <br></br>
-          <Button variant="info" onClick={e => {
+            <Container  fluid="md">
+                <Row >
+                    <Col>
+                    <Button className='full-width-btn' variant="info" onClick={e => {
                     setSeaters(seats);
-                    setAvailableSeaters(availableSeats)}}>Refresh</Button>
-                    
-            <Button variant="danger" onClick={e => {
+                    setAvailableSeaters(availableSeats)}}><FaRedo /></Button>
+                    </Col>
+                    <Col>
+                    <Button className='full-width-btn' variant="danger" onClick={e => {
                     history.push("/home")}}>Cancel</Button>
-            <div >
-                <h3>[{seaters}] seats soon to be available at {building} </h3>
-            </div>
+                    </Col>
+                </Row>
+                <Row>
+                  <Col className='info-announcement'>
+                  <h2  className='font-link'>[{seaters}] seats soon to be available at {building} </h2>
+                  </Col>
+                </Row>
+            </Container>
+                
             {availableSeaters.map((obj)=> (
                 <AvailableSeat key={obj.id} availableSeat={obj}/>
             ))}
