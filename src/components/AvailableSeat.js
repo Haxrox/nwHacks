@@ -15,7 +15,7 @@ const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) =
         <Card.Header as="h5">
             <Container  fluid="md">
                 <Row >
-                    <Col><img src="https://lh3.googleusercontent.com/a-/AOh14GgCSvUXaA7rvUqbwB3SfnjTNW7C6876GE_-d4uJ3w=s96-c" 
+                    <Col><img src={availableSeat.userData.avatar} // "https://lh3.googleusercontent.com/a-/AOh14GgCSvUXaA7rvUqbwB3SfnjTNW7C6876GE_-d4uJ3w=s96-c" 
                               className='img-fluid rounded-circle img-shadow'
                               alt="new"/> 
                     </Col>
