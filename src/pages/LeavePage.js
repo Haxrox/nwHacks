@@ -32,7 +32,8 @@ const LeavePage = () => {
             displayName: auth.currentUser.displayName,
             avatar: auth.currentUser.photoURL
           },
-          responder: null
+          responder: null,
+          state: null
         }
       }).catch(console.error);
       history.push({

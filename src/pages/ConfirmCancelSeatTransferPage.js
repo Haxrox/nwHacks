@@ -20,11 +20,17 @@ const ConfirmCancelSeatTransferPage = () => {
         [`${history.location.data.userData.uid}.responder`]: auth.currentUser.uid
     });
     const handleConfirm = () => {
+        UpdateDocument(history.location.building, "Requesters", {
+            [`${history.location.data.userData.uid}.state`]: true
+        });
         history.push("/home")
         //add token transfer and delete match done from database 
     }
 
     const handleAFK = () => {
+        UpdateDocument(history.location.building, "Requesters", {
+            [`${history.location.data.userData.uid}.state`]: false
+        });
         history.push("/home")
         //delete match done from database 
     }

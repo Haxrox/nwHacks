@@ -2,22 +2,47 @@ import React from 'react'
 import  Button  from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
-import { deleteField, getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { deleteField, getFirestore, doc, updateDoc, increment } from 'firebase/firestore';
+import {Firestore, Listen, Unsubscribe, UpdateDocument} from '../firebase.js';
 
 const MatchPage = () => {
 
     const history = useHistory();
     // console.log(history.data.location)
 
+    const auth = getAuth();
+    const seatedUserId = auth.currentUser.uid
+    const requesterDocument = doc(Firestore, history.location.location, "Requesters");
+    Listen(requesterDocument, "requestersUpdated", (data => {
+        const requestInfo = data[auth.currentUser.uid];
+        if (requestInfo && requestInfo.state != null) {
+            Unsubscribe(requesterDocument, "requestersUpdated");
+
+            if (requestInfo.state) {
+                UpdateDocument("Users", requestInfo.responder, {
+                    tokenCount: increment(1)
+                });   
+            }
+            
+            UpdateDocument("Users", seatedUserId, {
+                tokenCount: increment(-1)
+            });
+
+            updateDoc(requesterDocument, requesterDocument, {
+                [seatedUserId]: deleteField()
+            })
+        }
+    }))
+
     const handleLeave = () => {
         //handle backend, ie delete match and notify requestor
-        //also implement -1 token       
-        var seatedUserId = getAuth().currentUser.uid
-        const db = getFirestore()
-        const requestersRef = doc(db, history.data.location, "Requesters")
-        updateDoc(requestersRef, {
+        //also implement -1 token
+        updateDoc(Firestore, requesterDocument, {
             [seatedUserId]: deleteField()
         })
+        UpdateDocument("Users", seatedUserId, {
+            tokenCount: increment(-1)
+        });
         history.push("/home")        
     };
     return (
