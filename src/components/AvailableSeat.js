@@ -40,7 +40,7 @@ const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) =
             <Card.Text>
             {availableSeat.responderMessage}
             </Card.Text>
-            <ReserveRequest tokenCost={availableSeat.tokenCost} />
+            <ReserveRequest tokenCost={availableSeat.tokenCost} message={availableSeat} pfp={availableSeat.userData.avatar}/>
         </Stack>
         </Card.Body>
         </Card>
