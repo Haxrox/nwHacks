@@ -1,10 +1,14 @@
-const Header = () => {
+const Header = ({text}) => {
 
     return (
         <div>
-            <p>hey</p>
+            <p>{text}</p>
         </div>
     )
+}
+
+Header.defaultProps = {
+    text: "This is default text",
 }
 
 export default Header
