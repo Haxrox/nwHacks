@@ -25,12 +25,12 @@ function getSeatsData(data) {
 }
 
 function getAvailableSeatsData(data) {
-  data.Users.forEach((seat, index) => {
+  availableSeatData = data.Users.filter(element => element.leaveTime > Date.now());
+  availableSeatData.sort((firstElement, secondElement) => firstElement.leaveTime - secondElement.leaveTime).forEach((seat, index) => {
     seat.leaveTime = new Date(seat.leaveTime).toLocaleTimeString('en-US');
     seat.waitTime = new Date(seat.leaveTime).getMinutes();
     seat.id = index;
   });
-  availableSeatData = data.Users;
   return availableSeatData;
 }
 
