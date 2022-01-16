@@ -6,21 +6,22 @@ const firebaseConfig = require("./config/firebaseConfig.json");
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
-const firestore = getFirestore();
+const Firestore = getFirestore();
 
-const listeners = {};
+var listeners = {};
 
 function initListener(document) {
-    listeners[document].Active = true;
-    listeners[document].Subscription = onSnapshot(document, (document => {
-        listeners[document.id].Callback.values().forEach((callback) => {
-            callback(document);
+    listeners[document.path].Active = true;
+    listeners[document.path].Subscription = onSnapshot(document, { includeMetadataChanges: false }, (snapshot => {
+        console.log(`${snapshot.ref.path} Changed`);
+        Object.values(listeners[snapshot.ref.path].Callback).forEach((callback) => {
+            callback(snapshot.data());
         });
     }));
 }
 
 function GetDocument(collection, document) {
-    return getDoc(doc(firestore, collection, document)).then(snapshot => {
+    return getDoc(doc(Firestore, collection, document)).then(snapshot => {
         console.log(`Got ${collection}/${document} Data`);
         if (snapshot.exists()) {
             return snapshot.data();
@@ -31,49 +32,55 @@ function GetDocument(collection, document) {
 }
 
 function UpdateDocument(collection, document, data) {
-    return updateDoc(doc(firestore, collection, document), data).then(() => {
+    return updateDoc(doc(Firestore, collection, document), data).then(() => {
         console.log(`Wrote to document: ${collection}/${document}`);
     });
 }
 
 function Listen(document, callbackID, callback) {
-    const listenersCache = listeners[document] || {
+    console.log("Listen - " + document.path);
+    const listenersCache = listeners[document.path] || {
         Active: false,
         Subscription: null,
         Callback: {}
     };
     listenersCache.Callback[callbackID] = callback;
-    listeners[document] = listenersCache;
+    listeners[document.path] = listenersCache;
     if (!listenersCache.Active) {
-        initListener();
+        initListener(document);
     }
 }
 
 function Unsubscribe(document, callbackID) {
-    const listenersCache = listeners[document];
-    if (listenersCache != null) {
-        delete listenersCache.Callback[callbackID];
+    if (document) {
+        const listenersCache = listeners[document.path];
+        if (listenersCache != null) {
+            delete listenersCache.Callback[callbackID];
+            if (listenersCache.Callback == {}) {
+                listenersCache.Active = false;
+            }
+        }
     }
 }
 
 (async() => {
-    const snapshot = await getDocs(collection(firestore, "Spaces"));
+    const snapshot = await getDocs(collection(Firestore, "Spaces"));
     snapshot.forEach(document => {
-        listeners[document] = {
+        listeners[document.ref.path] = listeners[document.ref.path] || {
             Active: false,
             Subscription: null,
             Callback: {}
         };
 
-        const requestDocument = doc(firestore, document.id, "Requesters");
-        listeners[requestDocument] = {
+        const requestDocument = doc(Firestore, document.id, "Requesters");
+        listeners[requestDocument.path] = listeners[requestDocument.path] || {
             Active: false,
             Subscription: null,
             Callback: {}
         }
 
-        const respondDocument = doc(firestore, document.id, "Responders");
-        listeners[respondDocument] = {
+        const respondDocument = doc(Firestore, document.id, "Responders");
+        listeners[respondDocument.path] = listeners[respondDocument.path] || {
             Active: false,
             Subscription: null,
             Callback: {}
@@ -82,5 +89,5 @@ function Unsubscribe(document, callbackID) {
 })();
 
 export {
-    GetDocument, UpdateDocument, Listen, Unsubscribe
+    Firestore, GetDocument, UpdateDocument, Listen, Unsubscribe
 };

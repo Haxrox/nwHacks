@@ -2,9 +2,9 @@ import Header from '../components/Header'
 import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
-import {GetDocument} from "../firebase.js"
-import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
-import React, { useState } from "react";
+import {Firestore, GetDocument, Listen, Unsubscribe} from "../firebase.js"
+import { doc } from "firebase/firestore"
+import React, { useEffect, useState } from "react";
 import { getAuth } from 'firebase/auth';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
@@ -12,9 +12,24 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FaRedo } from "react-icons/fa";
 
+var seatData = 0;
+var availableSeatData = [];
+var seatDocument, requestDocument;
 
-var id = 0;
-console.log("SendRequestPage.js");
+function getSeatsData(data) {
+  return data.Floors.reduce((previousValue, currentValue) => 
+    previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
+  );
+}
+
+function getAvailableSeatsData(data) {
+  data.Users.forEach((seat, index) => {
+    seat.leaveTime = new Date(seat.leaveTime).toLocaleTimeString('en-US');
+    seat.waitTime = new Date(seat.leaveTime).getMinutes();
+    seat.id = index;
+  });
+  return data.Users;
+}
 
 const SeatRequestPage = () => {
 
@@ -36,35 +51,40 @@ const SeatRequestPage = () => {
     // }  
   
     const history = useHistory();
-    const building = history.location.data;
+    const building = history.location.data || "IKB"; // default to IKB for now
     console.log(building);
-    var seats;
-    const [seaters, setSeaters] = useState();
-    const [availableSeaters, setAvailableSeaters] = useState([]);
-    var availableSeats = [];
+    const [seats, setSeats] = useState(seatData);
+    const [availableSeats, setAvailableSeats] = useState(availableSeatData);
 
-    
-
-    GetDocument("Spaces", building).then(data => {
-        seats = data.Floors.reduce((previousValue, currentValue) => 
-        previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
-      );
-      console.log("Seats: " + seats);
-    }).catch((error) => {
-      console.error("Space error - " + error);
-    });
-
-    GetDocument(building, "Requesters").then(data => {
-      data.Users.forEach((seat, index) => {
-        seat.leaveTime = new Date(seat.leaveTime).toLocaleTimeString('en-US');
-        seat.waitTime = new Date(seat.leaveTime).getMinutes();
-        seat.id = index;
+    useEffect(() => {
+      Unsubscribe(seatDocument);
+      Unsubscribe(requestDocument);
+      seatDocument = doc(Firestore, "Spaces", building);
+      requestDocument = doc(Firestore, building, "Requesters");
+      Listen(seatDocument, "freeSpace", (data) => {
+        setSeats(getSeatsData(data));
       });
-      availableSeats = data.Users;
-      console.log(availableSeats);
-    }).catch((error) => {
-      console.error("Requesters error - " + error);
-    });
+      Listen(requestDocument, "request", (data) => {
+        setAvailableSeats(getAvailableSeatsData(data));
+      });
+    }, [building]);
+
+    useEffect(() => {
+      GetDocument("Spaces", building).then(data => {
+        setSeats(getSeatsData(data));
+      }).catch((error) => {
+        console.error("Space error - " + error);
+      });
+    }, []);
+
+    useEffect(() => {
+      GetDocument(building, "Requesters").then(data => {
+        setAvailableSeats(getAvailableSeatsData(data));
+      }).catch((error) => {
+        console.error("Requesters error - " + error);
+      });
+    }, []);
+    
     /*
         {
           responderMessage: "Hi my name is Joe Mama and I'm sitting behind you",
@@ -98,8 +118,8 @@ const SeatRequestPage = () => {
                 <Row >
                     <Col md="9">
                     <Button className='full-width-btn' variant="info" onClick={e => {
-                    setSeaters(seats);
-                    setAvailableSeaters(availableSeats)}}><FaRedo /></Button>
+                      setSeats(seatData);
+                      setAvailableSeats(availableSeatData)}}><FaRedo /></Button>
                     </Col>
                     <Col md="3">
                     <Button className='full-width-btn' variant="danger" onClick={e => {
@@ -108,12 +128,12 @@ const SeatRequestPage = () => {
                 </Row>
                 <Row>
                   <Col className='info-announcement'>
-                  <h2  className='font-link'>[{seaters}] seats soon to be available at {building} </h2>
+                  <h2  className='font-link'>[{seats}] seats soon to be available at {building} </h2>
                   </Col>
                 </Row>
             </Container>
                 
-            {availableSeaters.map((obj)=> (
+            {availableSeats.map((obj)=> (
                 <AvailableSeat key={obj.id} availableSeat={obj}/>
             ))}
 

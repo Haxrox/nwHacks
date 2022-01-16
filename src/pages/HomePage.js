@@ -1,13 +1,16 @@
 import Header from "../components/Header"
 import Form from "react-bootstrap/Form"
 import Button from 'react-bootstrap/Button'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
 import { getAuth } from 'firebase/auth'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { GetDocument } from "../firebase";
+
+var buildingData = {};
 
 function parseBuildings(snapshot) {
     const data = [];
@@ -21,7 +24,7 @@ function parseBuildings(snapshot) {
         data.push(<option value={doc.id} key={doc.id}>{doc.id} [{freeSeats}/{totalSeats}]</option>);
     });
     return data;
-  }
+}
 
 const Home = () => {
 
@@ -30,12 +33,16 @@ const Home = () => {
     
     const [buildings, setBuildings] = useState([]);
 
-    const firestore = getFirestore();
-    const spaceCollection = collection(firestore, "Spaces");
-    (async() => {
-        const snapshot = await getDocs(spaceCollection);
-        setBuildings(parseBuildings(snapshot));
-    })();
+    useEffect(() => {
+        const firestore = getFirestore();
+        const spaceCollection = collection(firestore, "Spaces");
+        (async() => {
+            const snapshot = await getDocs(spaceCollection);
+            setBuildings(parseBuildings(snapshot));
+            setLocation(snapshot.docs[0].id);
+        })();
+    }, [buildingData]);
+    
 
     const handleRequestor = () => {
         history.push({
