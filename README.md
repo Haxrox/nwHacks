@@ -2,6 +2,10 @@
 nwHacks Project
 Team Members: Bell Chensler, John Do, Kerry Wanger Banger, Sina Allen Bellen
 
+Ever wondered around IKB like you're homeless? 
+
+Just sit down
+
 # Installing necessary dependencies
 1. Install firebase-tools: `npm install -g firebase-tools` 
 
