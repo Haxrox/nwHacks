@@ -52,6 +52,9 @@ const Cheese = ({setUserTokenCount, setUserDisplayName}) => {
                         setUserTokenCount(docSnap.data().TokenCount.toString())
                     } else {
                         console.log("User does not exist") 
+                        setDoc(doc(db, "Users", getAuth().currentUser.uid), {
+                            TokenCount: 0
+                        })
                     }
                 })
                 setUserDisplayName(auth.currentUser.displayName)
