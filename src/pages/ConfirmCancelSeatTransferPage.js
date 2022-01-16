@@ -17,6 +17,16 @@ const ConfirmCancelSeatTransferPage = () => {
     UpdateDocument(history.data.location, "Requesters", {
         [history.location.data.responder]: auth.currentUser.uid
     });
+    const handleConfirm = () => {
+        history.push("/home")
+        //add token transfer and delete match done from database 
+    }
+
+    const handleAFK = () => {
+        history.push("/home")
+        //delete match done from database 
+    }
+
 
     return (
         <div>
@@ -47,7 +57,7 @@ const ConfirmCancelSeatTransferPage = () => {
             <br/><br/><br/><br/><br/>
                 <Card.Title><h1>{history.location.data.responderMessage}</h1></Card.Title>
                 <br/><br/><br/><br/><br/>
-                <Card.Body><Button variant="success"size="lg">Confirm</Button><Button variant="danger"size="lg">Where is this guy?</Button></Card.Body>
+                <Card.Body><Button variant="success"size="lg" onClick={handleConfirm}>Confirm</Button><Button variant="danger"size="lg" onClick={handleAFK}>Where is this guy?</Button></Card.Body>
             </Stack>
             </Card.Body>
             </Card>
