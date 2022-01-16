@@ -137,7 +137,7 @@ const SeatRequestPage = () => {
             </Container>
                 
             {availableSeats.map((obj)=> (
-                <AvailableSeat key={obj.id} availableSeat={obj}/>
+                <AvailableSeat key={obj.id} building={building} availableSeat={obj}/>
             ))}
 
         </div>

@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
-const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) => {
+const AvailableSeat = ({building, availableSeat}) => {
     return (
     <div>
         <div className="w-responsive text-center mx-auto p-5 mt-5" className="padding">
@@ -40,7 +40,7 @@ const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) =
             <Card.Text>
             {availableSeat.responderMessage}
             </Card.Text>
-            <ReserveRequest tokenCost={availableSeat.tokenCost} message={availableSeat} pfp={availableSeat.userData.avatar}/>
+            <ReserveRequest tokenCost={availableSeat.tokenCost} building={building} message={availableSeat} pfp={availableSeat.userData.avatar}/>
         </Stack>
         </Card.Body>
         </Card>

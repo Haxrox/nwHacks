@@ -4,13 +4,14 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 
 
-const ReserveRequest = ({tokenCost, message}) => {
+const ReserveRequest = ({tokenCost, building, message}) => {
 
     const history = useHistory();
     const handleReserve = () => {
         //handle reserve, matach made backend
         history.push({
             pathname: "/confirm",
+            building: building,
             data: message
         });
     }

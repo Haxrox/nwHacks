@@ -7,9 +7,17 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
+import {UpdateDocument} from '../firebase.js';
 
 const ConfirmCancelSeatTransferPage = () => {
+    
     const history = useHistory();
+
+    const auth = getAuth();
+    UpdateDocument(history.data.location, "Requesters", {
+        [history.location.data.responder]: auth.currentUser.uid
+    });
+
     return (
         <div>
 
