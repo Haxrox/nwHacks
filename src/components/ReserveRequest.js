@@ -4,10 +4,11 @@ import Button from 'react-bootstrap/Button'
 const ReserveRequest = ({tokenCost}) => {
     return (
         <div>
-           <Button variant="primary">Reserve Now</Button>
+           
            <div>
-               <p>Cost: {tokenCost} tokens</p>
+               <p>Cost: {tokenCost} token(s)</p>
            </div>
+           <Button className='reserve-btn' variant="primary">Reserve Now</Button>
         </div>
     )
 }

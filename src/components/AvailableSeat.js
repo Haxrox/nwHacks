@@ -16,17 +16,27 @@ const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) =
             <Container  fluid="md">
                 <Row >
                     <Col><img src="https://lh3.googleusercontent.com/a-/AOh14GgCSvUXaA7rvUqbwB3SfnjTNW7C6876GE_-d4uJ3w=s96-c" 
-                              className='img-fluid rounded-circle'
+                              className='img-fluid rounded-circle img-shadow'
                               alt="new"/> 
                     </Col>
-                    <Col className="d-flex align-items-center"><p className='modern-border'>Available at: {availableSeat.leaveTime}</p></Col>
-                    <Col className="d-flex align-items-center"><p className='border border-warning'>Reserved until: {availableSeat.waitTime}</p></Col>
+                    <Col className="d-flex align-items-center modern-border-danger">
+                        <div className='center'>
+                            Available 
+                            <p className='font-link-huge-clock'> {availableSeat.leaveTime}</p>
+                        </div>
+                    </Col>
+                    <Col className="d-flex align-items-center modern-border-warning">
+                        <div className='center'> 
+                            Reserved For
+                            <p className='font-link-huge-time'>{availableSeat.waitTime} </p>
+                        </div>
+                    </Col>
                 </Row>
             </Container>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className='font-link'>
         <Stack gap={1} className="col-md-5 mx-auto">
-            <Card.Title>Sender directions:</Card.Title>
+            <Card.Title> <p className='font-link'>Sender directions:</p></Card.Title>
             <Card.Text>
             {availableSeat.responderMessage}
             </Card.Text>
