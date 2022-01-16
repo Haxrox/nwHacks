@@ -131,7 +131,7 @@ const SeatRequestPage = () => {
                 </Row>
                 <Row>
                   <Col className='info-announcement'>
-                  <h2  className='font-link'>[{seats}] seats soon to be available at {building} </h2>
+                  <h2  className='font-link'>{availableSeatData.length} seats soon to be available at {building} </h2>
                   </Col>
                 </Row>
             </Container>
