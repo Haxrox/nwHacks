@@ -19,8 +19,6 @@ Header.defaultProps = {
     
 }
 
-
-
 const borderStyles = {
 
         marginRight: 40,
