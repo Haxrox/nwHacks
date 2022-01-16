@@ -3,7 +3,7 @@ import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
 import {Firestore, GetDocument, Listen, Unsubscribe} from "../firebase.js"
-import { doc } from "firebase/firestore"
+import { doc, getDoc, getFirestore } from "firebase/firestore"
 import React, { useEffect, useState } from "react";
 import { getAuth } from 'firebase/auth';
 import { Button } from 'react-bootstrap';
@@ -11,6 +11,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FaRedo } from "react-icons/fa";
+
 
 var seatData = 0;
 var availableSeatData = [];
@@ -35,22 +36,22 @@ function getAvailableSeatsData(data) {
 
 const SeatRequestPage = () => {
 
-    const [userTokenCount, setUserTokenCount] = useState('0')
-    const [userDisplayname, setUserDisplayname] = useState("not logged in user")
-    // const auth = getAuth()
-    // const db = getFirestore()
-    // if (auth.currentUser) {
-    //     const docRef = doc(db, "Users", auth.currentUser.uid); 
-    //     getDoc(docRef).then((docSnap) => {
-    //         if (docSnap.exists()) {
-    //             console.log(docSnap.data().TokenCount.toString())
-    //             setUserTokenCount(docSnap.data().TokenCount.toString())
-    //         } else {
-    //             console.log("User does not exist") 
-    //         }
-    //     })
-    //     setUserDisplayname(auth.currentUser.displayName)
-    // }  
+  const [userTokenCount, setUserTokenCount] = useState('0')
+  var userDisplayname = "not logged in user"
+  const auth = getAuth()
+  const db = getFirestore()
+  if (auth.currentUser) {
+      const docRef = doc(db, "Users", auth.currentUser.uid); 
+      getDoc(docRef).then((docSnap) => {
+          if (docSnap.exists()) {
+              console.log(docSnap.data().TokenCount.toString())
+              setUserTokenCount(docSnap.data().TokenCount.toString())
+          } else {
+              console.log("User does not exist") 
+          }
+      })
+      userDisplayname = auth.currentUser.displayName
+  }
   
     const history = useHistory();
     const building = history.location.data || "IKB"; // default to IKB for now
