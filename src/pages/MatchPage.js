@@ -1,6 +1,8 @@
 import React from 'react'
 import  Button  from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom';
+// import {}
+
 const MatchPage = () => {
 
     const history = useHistory();
@@ -8,8 +10,8 @@ const MatchPage = () => {
     const handleLeave = () => {
         //handle backend, ie delete match and notify requestor
         //also implement -1 token
-        history.push("/home")
-
+        console.log(history.location)
+        history.push("/home")        
 
     };
     return (

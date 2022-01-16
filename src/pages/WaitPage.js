@@ -7,10 +7,12 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 const WaitPage = () => {
 
     const history = useHistory();
+    const location = history.location.data
+    console.log(location)
     const handleCancel = () => {
         //add backend to delete/cancel current response from database
-        history.push("/home")};
-
+        
+        history.push("/home")};        
     return (
         <div>
             

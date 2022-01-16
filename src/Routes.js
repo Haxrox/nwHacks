@@ -7,6 +7,7 @@ import LeavePage from "./pages/LeavePage.js";
 import SeatRequestPage from "./pages/SeatRequestPage.js";
 import WaitPage from "./pages/WaitPage.js";
 import ConfirmCancelSeatTransferPage from './pages/ConfirmCancelSeatTransferPage'
+import MatchPage from './pages/MatchPage'
 //import MatchPage from "./pages/MatchPage.js";
 
 /**
@@ -35,7 +36,7 @@ export const Routes = () => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/wait" component={WaitPage} />
         <Route exact path="/confirm" component={ConfirmCancelSeatTransferPage} />
-        {/* <Route exact path="/match" component={MatchPage}/> */}
+        <Route exact path="/match" component={MatchPage}/>
       </Switch>
     </BrowserRouter>
   );

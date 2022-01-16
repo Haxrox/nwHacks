@@ -35,7 +35,10 @@ const LeavePage = () => {
           responder: null
         }
       }).catch(console.error);
-      history.push("/wait");
+      history.push({
+        pathname: "/wait",
+        data: history.location.data
+      });
     };
 
     const onUpdate = async () => {
