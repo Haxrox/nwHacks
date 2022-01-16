@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Configuration
+nwhacks-sitdown-firebase-adminsdk-p1bya-31ed4c6787.json
+
 # dependencies
 /node_modules
 /.pnp
