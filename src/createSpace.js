@@ -7,16 +7,13 @@ firebaseAdmin.initializeApp({
 });
 
 const firestore = firebaseFirestore.getFirestore();
-const spaceConfiguration = require("./spaceConfiguration.json");
-
-const collectionReference = firestore.collection(spaceConfiguration.Name);
-
+const spaceConfiguration = require("./config/spaceConfiguration.json");
 
 // Extracting this data from a map would be pretty op
 spaceConfiguration.Configuration.Location = new firebaseFirestore.GeoPoint(spaceConfiguration.Configuration.Location.Latitude, spaceConfiguration.Configuration.Location.Longitude);
 
 (async() => {
-    collectionReference.doc("Configuration").set(spaceConfiguration.Configuration).then(() => {
+    firestore.collection("Spaces").doc(spaceConfiguration.Name).set(spaceConfiguration.Configuration).then(() => {
         console.log("Configuration set successfully");
     }).catch(console.error);
 })();
