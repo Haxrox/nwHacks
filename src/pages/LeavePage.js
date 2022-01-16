@@ -2,6 +2,9 @@ import Header from '../components/Header'
 import Form from "react-bootstrap/Form"
 import Button from 'react-bootstrap/Button'
 import React, { useState } from "react"
+import { useHistory } from "react-router-dom";
+import { UpdateDocument } from "../firebase.js";
+import {arrayUnion} from "firebase/firestore";
 
 const LeavePage = () => {
 
@@ -10,10 +13,22 @@ const LeavePage = () => {
     const [tolerance, setTolerance] = useState();   
     const [address, setAddress] = useState();  
     //assuming we are using localStorage to store user's location
+    
+    const history = useHistory();
 
-    const onSubmit = () => {
-        console.log(leaveIn, tolerance);
-      };
+    console.log(history.location.data);
+
+    const onSubmit = async () => {
+      console.log(leaveIn, tolerance);
+      UpdateDocument(history.location.data, "Requesters", {
+        Users: arrayUnion({
+          responderMessage: address,
+          leaveTime: Date.now() + leaveIn * 60 * 1000,
+          waitTime: tolerance * 60 * 1000,
+          tokenCost: 1
+        })
+      }).catch(console.error);
+    };
     
     return (
         <div>

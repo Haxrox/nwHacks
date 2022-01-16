@@ -1,10 +1,43 @@
 import Header from '../components/Header'
 import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
+import { useHistory } from "react-router-dom";
+import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
+import {GetDocument} from "../firebase.js"
 
-const SeatRequestPage = ({building, seats}) => {
-    console.log(seats);
-    const availableSeats = [
+var id = 0;
+console.log("SendRequestPage.js");
+
+const SeatRequestPage = () => {
+
+    
+    const history = useHistory();
+    const building = history.location.data;
+    console.log(building);
+    var seats;
+    var availableSeats = [];
+
+    GetDocument("Spaces", building).then(data => {
+      seats = data.Floors.reduce((previousValue, currentValue) => 
+        previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
+      );
+      console.log("Seats: " + seats);
+    }).catch((error) => {
+      console.error("Space error - " + error);
+    });
+
+    GetDocument(building, "Requesters").then(data => {
+      data.Users.forEach((seat, index) => {
+        seat.leaveTime = new Date(seat.leaveTime).toLocaleTimeString('en-US');
+        seat.waitTime = new Date(seat.leaveTime).getMinutes();
+        seat.id = index;
+      });
+      availableSeats = data.Users;
+      console.log(availableSeats);
+    }).catch((error) => {
+      console.error("Requesters error - " + error);
+    });
+    /*
         {
           responderMessage: "Hi my name is Joe Mama and I'm sitting behind you",
           leaveTime: "4:00PM",
@@ -27,6 +60,7 @@ const SeatRequestPage = ({building, seats}) => {
           id: "3",
         },
       ]
+      */
     return (
         <div>
             <Header />
