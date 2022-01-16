@@ -13,3 +13,18 @@ code {
 } */
 
 /* NEW CHANGES */
+.padding {
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 1%;
+}
+
+img {
+  border-radius: "50%";
+  display: block;
+}
+
+.modern-border{
+  border-style: solid;
+  border-width: medium;
+}

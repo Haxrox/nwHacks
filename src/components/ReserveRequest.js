@@ -6,7 +6,7 @@ const ReserveRequest = ({tokenCost}) => {
         <div>
            <Button variant="primary">Reserve Now</Button>
            <div>
-               <h4>Cost: {tokenCost}</h4>
+               <p>Cost: {tokenCost} tokens</p>
            </div>
         </div>
     )
