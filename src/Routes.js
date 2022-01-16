@@ -4,7 +4,7 @@ import  Home  from "./pages/HomePage.js";
 import AvailableSeats  from "./components/AvailableSeat.js";
 import LoginPage from "./pages/LoginPage.js";
 import LeavePage from "./pages/LeavePage.js";
-import SeatRequestPage from "./components/SeatRequestPage.js";
+import SeatRequestPage from "./pages/SeatRequestPage.js";
 
 /**
  * We use the react-router-dom library to simplify routing in our application.
@@ -19,6 +19,9 @@ import SeatRequestPage from "./components/SeatRequestPage.js";
  */
 
 export const Routes = () => {
+
+  
+
   return (
     <BrowserRouter>
       <Switch>

@@ -21,15 +21,15 @@ Header.defaultProps = {
 
 const borderStyles = {
 
-        marginRight: 40,
-        marginLeft: 40,
+        marginRight: 0,
+        marginLeft: 0,
         marginTop: 10,
-        paddingTop: 20,
-        paddingBottom: 20,
-        backgroundColor: '#000080',
-        borderRadius: 10,
+        paddingTop: 10,
+        paddingBottom: 1,
+        backgroundColor: '#4169E1',
+        borderRadius: 0,
         borderWidth: 1,
-        borderColor: '#F0FFFF',
+        borderColor: '#4169E1',
         color: '#fff',
         textAlign: 'center',
         
