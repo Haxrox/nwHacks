@@ -4,10 +4,11 @@ import Header from './components/Header.js';
 import SeatRequestPage from './components/SeatRequestPage.js';
 import Cheese from './components/Cheese.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import HomePage from "./components/HomePage"
+import HomePage from "./pages/HomePage"
 import Login from "./components/Login"
 import {useState} from 'react'
 import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
+import { Routes } from './Routes';
 
 function parseSpaces(snapshot, setBuilding, setSeatCount) {
   snapshot.forEach((doc) => {
@@ -39,15 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-
-        <Route exact path="/home" component={HomePage} />
-        <Route exact path="/kimchi" component={Header} />
-
-      </Switch>
-    </BrowserRouter>
+      <Routes/>
     </div>
   );
 }

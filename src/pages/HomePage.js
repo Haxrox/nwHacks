@@ -1,12 +1,24 @@
-import Header from "./Header"
+import Header from "../components/Header"
 import Form from "react-bootstrap/Form"
 import Button from 'react-bootstrap/Button'
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 const Home = () => {
 
     const [location, setLocation] = useState();
-    let buildings = ["Koerner", "IKB"];
+    const history = useHistory();
 
+    const handleRequestor = () => {
+        history.push({
+            pathname: "/request",
+          });
+    }
+    
+    const handleResponder = () => {
+        history.push({
+            pathname: "/responder",
+          });
+    }
     
     return (
         <div>
@@ -32,15 +44,16 @@ const Home = () => {
                 <br></br>
                 <br></br>
                 <br></br>
-            <Button variant="primary" >I want a seat</Button>
+            <Button variant="primary" onClick={handleRequestor}>I want a seat</Button>
             <br></br>
             <br></br>
-            <Button variant="info" >I can give a seat</Button>
+            <Button variant="info" onClick={handleResponder}>I can give a seat</Button>
 
             </div>            
         </div>
     )
 }
+
 
 
 export default Home
