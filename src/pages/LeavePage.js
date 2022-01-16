@@ -72,7 +72,7 @@ const LeavePage = () => {
                 rows="1"
                 placeholder="Where am I sitting"
                 value={address}
-                type="text"
+                type="number"
                 onChange={e => {
                     setAddress(e.target.value);
                   }}/>       
