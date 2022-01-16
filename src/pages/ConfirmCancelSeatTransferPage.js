@@ -23,6 +23,11 @@ const ConfirmCancelSeatTransferPage = () => {
         UpdateDocument(history.location.building, "Requesters", {
             [`${history.location.data.userData.uid}.state`]: true
         });
+        
+        UpdateDocument("Users", auth.currentUser.uid, {
+            TokenCount: increment(-1)
+        });   
+
         history.push("/home")
         //add token transfer and delete match done from database 
     }

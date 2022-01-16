@@ -18,16 +18,12 @@ const MatchPage = () => {
         if (requestInfo && requestInfo.state != null) {
             Unsubscribe(requesterDocument, "requestersUpdated");
 
-            if (requestInfo.state) {
-                UpdateDocument("Users", requestInfo.responder, {
-                    TokenCount: increment(-1)
-                });   
+            if (requestInfo.state) {                
+                UpdateDocument("Users", seatedUserId, {
+                    TokenCount: increment(1)
+                });
             }
             
-            UpdateDocument("Users", seatedUserId, {
-                TokenCount: increment(1)
-            });
-
             UpdateDocument(history.location.location, "Requesters", {
                 [seatedUserId]: deleteField()
             });
