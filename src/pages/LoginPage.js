@@ -3,17 +3,16 @@ import Login from '../components/Login'
 import { setState, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
+import { useHistory } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [userTokenCount, setUserTokenCount] = useState('')
-    const [userDisplayname, setUserDisplayName] = useState("not logged in user")    
-    const childSetUserTokenCount = (tokenCount) => {
-        setUserTokenCount(tokenCount)
-    }
-    const childsetUserDisplayName = (displayName) => {
-        setUserDisplayName(displayName)
+    const history = useHistory()
+    const isLoggedIn = () => {        
+        console.log("logged in")
+        history.push('/home')
     }
 
+    console.log(getAuth().currentUser)
     return (
         <div>
             <div style={{marginRight: 400,
@@ -27,7 +26,7 @@ const LoginPage = () => {
     borderRadius: 5,
     borderWidth: 5,
     borderColor: '#F0FFFF'}}>
-            <Login />
+            <Login isLoggedIn={isLoggedIn}/>
             </div>
         </div>
     )

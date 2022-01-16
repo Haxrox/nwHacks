@@ -5,7 +5,7 @@ import {collection, getDocs, doc, query, onSnapshot, getFirestore, setDoc, getDo
 
 const authConfiguration = require("../config/authConfig.json");
 
-const Cheese = ({setUserTokenCount, setUserDisplayName}) => {
+const Cheese = ({isLoggedIn}) => {
 
     const handleLogin = async () => {
         const provider = new GoogleAuthProvider();
@@ -49,7 +49,6 @@ const Cheese = ({setUserTokenCount, setUserDisplayName}) => {
                 getDoc(docRef).then((docSnap) => {
                     if (docSnap.exists()) {
                         console.log(docSnap.data().TokenCount.toString())
-                        setUserTokenCount(docSnap.data().TokenCount.toString())
                     } else {
                         console.log("User does not exist") 
                         setDoc(doc(db, "Users", getAuth().currentUser.uid), {
@@ -57,8 +56,8 @@ const Cheese = ({setUserTokenCount, setUserDisplayName}) => {
                         })
                     }
                 })
-                setUserDisplayName(auth.currentUser.displayName)
-            }
+            }           
+            isLoggedIn()
             
             // ...
         }).catch((error) => {
