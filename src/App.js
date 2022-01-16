@@ -21,7 +21,6 @@ function parseSpaces(snapshot, setBuilding, setSeatCount) {
   });
 }
 
-
 function App() {
   const [building, setBuilding] = useState('');
   const [seatCount, setSeatCount] = useState('');
@@ -33,13 +32,34 @@ function App() {
     parseSpaces(snapshot, setBuilding, setSeatCount);
   })();
 
+  const availableSeats = [
+    {
+      responderMessage: "Hi my name is Joe Mama and I'm sitting behind you",
+      leaveTime: "4:00PM",
+      waitTime: "5 mins",
+      id: "1",
+    },
+    {
+      responderMessage: "Hi my name is Sina Allen and I'm sitting in front of you",
+      leaveTime: "44:00PM",
+      waitTime: "55 mins",
+      id: "2",
+    },
+    {
+      responderMessage: "Hi my name is Kerry Want and I'm sitting beside you",
+      leaveTime: "444:00PM",
+      waitTime: "555 mins",
+      id: "3",
+    },
+  ]
+
   onSnapshot(query(spaceCollection), (snapshot => {
     parseSpaces(snapshot, setBuilding, setSeatCount);
   }));
 
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
 
@@ -47,9 +67,12 @@ function App() {
         <Route exact path="/kimchi" component={Header} />
 
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter> */}
+
+    <SeatRequestPage availableSeats={availableSeats}/>
     </div>
   );
 }
+
 
 export default App;
