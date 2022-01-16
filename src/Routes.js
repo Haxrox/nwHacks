@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage.js";
 import LeavePage from "./pages/LeavePage.js";
 import SeatRequestPage from "./pages/SeatRequestPage.js";
 import WaitPage from "./pages/WaitPage.js";
+import ConfirmCancelSeatTransferPage from './pages/ConfirmCancelSeatTransferPage'
 
 /**
  * We use the react-router-dom library to simplify routing in our application.
@@ -32,6 +33,7 @@ export const Routes = () => {
         <Route exact path="/respond" component={LeavePage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/wait" component={WaitPage} />
+        <Route exact path="/confirm" component={ConfirmCancelSeatTransferPage} />
       </Switch>
     </BrowserRouter>
   );
