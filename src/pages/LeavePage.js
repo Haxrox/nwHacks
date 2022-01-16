@@ -8,6 +8,7 @@ const LeavePage = () => {
     const [location, setLocation] = useState(); 
     const [leaveIn, setLeaveIn] = useState(); 
     const [tolerance, setTolerance] = useState();   
+    const [address, setAddress] = useState();  
     //assuming we are using localStorage to store user's location
 
     const onSubmit = () => {
@@ -46,7 +47,20 @@ const LeavePage = () => {
                 type="text"
                 onChange={e => {
                     setTolerance(e.target.value);
-                  }}/>           
+                  }}/>      
+                <div style={{textAlign: 'left', marginLeft: "20px", fontWeight: "bold"}}>
+                I'm sitting at...
+                </div>
+                  <Form.Control
+                className="textFeedback"
+                as="textarea"
+                rows="1"
+                placeholder="Where am I sitting"
+                value={address}
+                type="text"
+                onChange={e => {
+                    setAddress(e.target.value);
+                  }}/>       
                 
             </Form.Group>
             <div style={{textAlign: 'left', marginLeft: "50px"}, border}>
