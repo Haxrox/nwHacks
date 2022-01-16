@@ -8,7 +8,6 @@ import HomePage from "./pages/HomePage"
 import {useState} from 'react'
 import { Routes } from './Routes';
 
-
 function App() {
 
   const availableSeats = [
@@ -16,18 +15,21 @@ function App() {
       responderMessage: "Hi my name is Joe Mama and I'm sitting behind you",
       leaveTime: "4:00PM",
       waitTime: "5 mins",
+      tokenCost: "1",
       id: "1",
     },
     {
       responderMessage: "Hi my name is Sina Allen and I'm sitting in front of you",
       leaveTime: "44:00PM",
       waitTime: "55 mins",
+      tokenCost: "2",
       id: "2",
     },
     {
-      responderMessage: "Hi my name is Kerry Want and I'm sitting beside you",
+      responderMessage: "Hi my name is Kerry Wang and I'm sitting beside you",
       leaveTime: "444:00PM",
       waitTime: "555 mins",
+      tokenCost: "3",
       id: "3",
     },
   ]
@@ -35,11 +37,10 @@ function App() {
   return (
 
     <div className="App">
-      <Routes/>
+    {/* <Routes/> */}
     <SeatRequestPage availableSeats={availableSeats}/>
     </div>
   );
 }
-
 
 export default App;

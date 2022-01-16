@@ -8,11 +8,12 @@ const SeatRequestPage = ({building, seats, availableSeats}) => {
         <div>
             <Header />
             <div>
-                <h3>Current available seats at {building} [{seats}]</h3>
+                <h3>[{seats}] seats soon to be available at {building} </h3>
             </div>
             {availableSeats.map((obj)=> (
                 <AvailableSeat key={obj.id} availableSeat={obj}/>
             ))}
+
         </div>
     )
 }

@@ -1,3 +1,5 @@
+import ReserveRequest  from './ReserveRequest'
+
 const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) => {
     return (
         <div>
@@ -7,6 +9,9 @@ const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) =
             </div>
             <div>
                 <p>Reserved until: {availableSeat.waitTime}</p>
+            </div>
+            <div>
+                <ReserveRequest tokenCost={availableSeat.tokenCost} />
             </div>
         </div>
     )
