@@ -2,8 +2,15 @@ import React from 'react'
 import { Spinner } from 'react-bootstrap'
 import Header from '../components/Header'
 import { Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const WaitPage = () => {
+
+    const history = useHistory();
+    const handleCancel = () => {
+        //add backend to delete/cancel current response from database
+        history.push("/respond")};
+
     return (
         <div>
             
@@ -23,11 +30,13 @@ const WaitPage = () => {
             <Button style={{marginTop: 150}}
                 className="btnFormSend"
                 variant="outline-danger"
-                >
+                onClick={handleCancel}>
+                
                 Cancel
             </Button>
         </div>
     )
+    
 }
 
 export default WaitPage

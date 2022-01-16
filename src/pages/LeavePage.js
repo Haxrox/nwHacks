@@ -28,6 +28,7 @@ const LeavePage = () => {
           tokenCost: 1
         })
       }).catch(console.error);
+      history.push("/wait");
     };
     
     return (

@@ -15,20 +15,20 @@ const SeatRequestPage = () => {
 
     const [userTokenCount, setUserTokenCount] = useState('0')
     const [userDisplayname, setUserDisplayname] = useState("not logged in user")
-    const auth = getAuth()
-    const db = getFirestore()
-    if (auth.currentUser) {
-        const docRef = doc(db, "Users", auth.currentUser.uid); 
-        getDoc(docRef).then((docSnap) => {
-            if (docSnap.exists()) {
-                console.log(docSnap.data().TokenCount.toString())
-                setUserTokenCount(docSnap.data().TokenCount.toString())
-            } else {
-                console.log("User does not exist") 
-            }
-        })
-        setUserDisplayname(auth.currentUser.displayName)
-    }  
+    // const auth = getAuth()
+    // const db = getFirestore()
+    // if (auth.currentUser) {
+    //     const docRef = doc(db, "Users", auth.currentUser.uid); 
+    //     getDoc(docRef).then((docSnap) => {
+    //         if (docSnap.exists()) {
+    //             console.log(docSnap.data().TokenCount.toString())
+    //             setUserTokenCount(docSnap.data().TokenCount.toString())
+    //         } else {
+    //             console.log("User does not exist") 
+    //         }
+    //     })
+    //     setUserDisplayname(auth.currentUser.displayName)
+    // }  
   
     const history = useHistory();
     const building = history.location.data;
@@ -84,13 +84,17 @@ const SeatRequestPage = () => {
         },
       ]
       */
+
     return (
         <div>
             <Header tokens={userTokenCount} user={userDisplayname}/>
+            <br></br>
           <Button variant="info" onClick={e => {
                     setSeaters(seats);
-                    setAvailableSeaters(availableSeats)}}>refresh</Button>
-            <Header />
+                    setAvailableSeaters(availableSeats)}}>Refresh</Button>
+                    
+            <Button variant="danger" onClick={e => {
+                    history.push("/home")}}>Cancel</Button>
             <div >
                 <h3>[{seaters}] seats soon to be available at {building} </h3>
             </div>
