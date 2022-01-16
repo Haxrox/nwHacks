@@ -13,9 +13,11 @@ const WaitPage = () => {
     const location = history.location.data;
 
     const auth = getAuth();
-    Listen(doc(Firestore, location, "Requesters"), "requestersUpdated", (data => {
+    const requesterDocument = doc(Firestore, location, "Requesters");
+    Listen(requesterDocument, "requestersUpdated", (data => {
         const requestInfo = data[auth.currentUser.uid];
         if (requestInfo && requestInfo.responder) {
+            Unsubscribe(requesterDocument, "requestersUpdated");
             history.push({
                 pathname: "/match",
                 location: location,
