@@ -17,9 +17,10 @@ var availableSeatData = [];
 var seatDocument, requestDocument;
 
 function getSeatsData(data) {
-  return data.Floors.reduce((previousValue, currentValue) => 
+  seatData = data.Floors.reduce((previousValue, currentValue) => 
     previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
   );
+  return seatData;
 }
 
 function getAvailableSeatsData(data) {
@@ -28,7 +29,8 @@ function getAvailableSeatsData(data) {
     seat.waitTime = new Date(seat.leaveTime).getMinutes();
     seat.id = index;
   });
-  return data.Users;
+  availableSeatData = data.Users;
+  return availableSeatData;
 }
 
 const SeatRequestPage = () => {
