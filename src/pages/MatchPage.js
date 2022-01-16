@@ -14,23 +14,24 @@ const MatchPage = () => {
     const seatedUserId = auth.currentUser.uid
     const requesterDocument = doc(Firestore, history.location.location, "Requesters");
     Listen(requesterDocument, "requestersUpdated", (data => {
-        const requestInfo = data[auth.currentUser.uid];
+        const requestInfo = data[seatedUserId];
         if (requestInfo && requestInfo.state != null) {
             Unsubscribe(requesterDocument, "requestersUpdated");
 
             if (requestInfo.state) {
                 UpdateDocument("Users", requestInfo.responder, {
-                    tokenCount: increment(1)
+                    TokenCount: increment(-1)
                 });   
             }
             
             UpdateDocument("Users", seatedUserId, {
-                tokenCount: increment(-1)
+                TokenCount: increment(1)
             });
 
-            updateDoc(requesterDocument, requesterDocument, {
+            UpdateDocument(history.location.location, "Requesters", {
                 [seatedUserId]: deleteField()
-            })
+            });
+            history.push("/home");
         }
     }))
 
@@ -41,7 +42,7 @@ const MatchPage = () => {
             [seatedUserId]: deleteField()
         })
         UpdateDocument("Users", seatedUserId, {
-            tokenCount: increment(-1)
+            TokenCount: increment(-1)
         });
         history.push("/home")        
     };
