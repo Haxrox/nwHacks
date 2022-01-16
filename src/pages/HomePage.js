@@ -54,9 +54,4 @@ const Home = () => {
     )
 }
 
-<<<<<<< HEAD:src/components/HomePage.js
-=======
-
-
->>>>>>> ce60fed2acbae304d46ee3d970e2d85be1b5540f:src/pages/HomePage.js
 export default Home

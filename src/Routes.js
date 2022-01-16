@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import  Home  from "./pages/HomePage.js";
-import AvailableSeats  from "./components/AvailableSeats.js";
+import AvailableSeats  from "./components/AvailableSeat.js";
 import LoginPage from "./pages/LoginPage.js";
 
 /**
