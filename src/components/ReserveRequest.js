@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
+import Button from 'react-bootstrap/Button'
 
 const ReserveRequest = ({tokenCost}) => {
     return (
         <div>
-           <button>Reserve Now!</button> 
+           <Button variant="primary">Reserve Now</Button>
            <div>
                <h4>Cost: {tokenCost}</h4>
            </div>

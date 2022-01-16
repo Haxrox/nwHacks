@@ -1,5 +1,5 @@
-import Header from './Header'
-import AvailableSeat from './AvailableSeat'
+import Header from '../components/Header'
+import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 
 const SeatRequestPage = ({building, seats, availableSeats}) => {
@@ -7,7 +7,7 @@ const SeatRequestPage = ({building, seats, availableSeats}) => {
     return (
         <div>
             <Header />
-            <div>
+            <div >
                 <h3>[{seats}] seats soon to be available at {building} </h3>
             </div>
             {availableSeats.map((obj)=> (

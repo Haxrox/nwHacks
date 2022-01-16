@@ -3,6 +3,9 @@ import ReserveRequest  from './ReserveRequest'
 const AvailableSeat = ({responderMessage, leaveTime, waitTime, availableSeat}) => {
     return (
         <div>
+            <div>
+                <p>image</p>
+            </div>
             <h4>{availableSeat.responderMessage}</h4>
             <div>
                 <p>Available at: {availableSeat.leaveTime}</p>

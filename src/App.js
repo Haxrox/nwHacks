@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header.js';
-import SeatRequestPage from './components/SeatRequestPage.js';
+import SeatRequestPage from './pages/SeatRequestPage.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 
@@ -37,8 +37,8 @@ function App() {
   return (
 
     <div className="App">
-      <Routes/>
-
+      {/* <Routes/> */}
+    <SeatRequestPage />
     </div>
   );
 }
