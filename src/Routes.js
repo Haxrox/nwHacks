@@ -19,6 +19,9 @@ import SeatRequestPage from "./components/SeatRequestPage.js";
  */
 
 export const Routes = () => {
+
+  
+
   return (
     <BrowserRouter>
       <Switch>

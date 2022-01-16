@@ -37,8 +37,8 @@ function App() {
   return (
 
     <div className="App">
-    {/* <Routes/> */}
-    <SeatRequestPage availableSeats={availableSeats}/>
+      <Routes/>
+
     </div>
   );
 }
