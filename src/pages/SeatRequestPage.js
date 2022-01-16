@@ -25,11 +25,11 @@ function getSeatsData(data) {
 }
 
 function getAvailableSeatsData(data) {
-  availableSeatData = data.Users.filter(element => element.leaveTime > Date.now());
-  availableSeatData.sort((firstElement, secondElement) => firstElement.leaveTime - secondElement.leaveTime).forEach((seat, index) => {
+  availableSeatData = Object.values(data).filter(element => element.leaveTime > Date.now());
+  availableSeatData.sort((firstElement, secondElement) => firstElement.leaveTime - secondElement.leaveTime).forEach((seat) => {
     seat.leaveTime = new Date(seat.leaveTime).toLocaleTimeString('en-US');
     seat.waitTime = new Date(seat.leaveTime).getMinutes();
-    seat.id = index;
+    seat.id = seat.userData.uid;
   });
   return availableSeatData;
 }

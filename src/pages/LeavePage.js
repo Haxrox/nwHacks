@@ -5,6 +5,7 @@ import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
 import { UpdateDocument } from "../firebase.js";
 import {arrayUnion} from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 
 const LeavePage = () => {
 
@@ -19,16 +20,34 @@ const LeavePage = () => {
     console.log(history.location.data);
 
     const onSubmit = async () => {
-      console.log(leaveIn, tolerance);
+      const auth = getAuth();
       UpdateDocument(history.location.data, "Requesters", {
-        Users: arrayUnion({
+        [auth.currentUser.uid]: {
+          responderMessage: address,
+          leaveTime: Date.now() + leaveIn * 60 * 1000,
+          waitTime: tolerance * 60 * 1000,
+          tokenCost: 1,
+          userData: {
+            uid: auth.currentUser.uid,
+            displayName: auth.currentUser.displayName,
+            avatar: auth.currentUser.photoURL
+          },
+          responder: null
+        }
+      }).catch(console.error);
+      history.push("/wait");
+    };
+
+    const onUpdate = async () => {
+      const auth = getAuth();
+      UpdateDocument(history.location.data, "Requesters", {
+        [auth.currentUser.uid]: {
           responderMessage: address,
           leaveTime: Date.now() + leaveIn * 60 * 1000,
           waitTime: tolerance * 60 * 1000,
           tokenCost: 1
-        })
+        }
       }).catch(console.error);
-      history.push("/wait");
     };
     
     return (
@@ -87,10 +106,17 @@ const LeavePage = () => {
             <Button
                 className="btnFormSend"
                 variant="outline-danger"
+                onClick={onUpdate}
+                >
+                Update
+            </Button>
+            <Button
+                className="btnFormSend"
+                variant="outline-danger"
                 onClick={onSubmit}
                 >
                 Leave
-                </Button>
+            </Button>
             
         </div>
         
