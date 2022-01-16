@@ -8,7 +8,7 @@ const WaitPage = () => {
         <div>
             
             <div style={{marginTop: 200}}>
-            <b>Looking for your seat</b>
+            <b>Looking for seat requests</b>
             </div>
             <div class="d-flex justify-content-center align-items-center" style={{marginTop: 40}}>
             

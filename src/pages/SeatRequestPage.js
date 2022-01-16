@@ -3,9 +3,14 @@ import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
 import {GetDocument} from "../firebase.js"
+<<<<<<< Updated upstream
 import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
 import React, { useState } from "react";
 import { getAuth } from 'firebase/auth';
+=======
+import { Button } from 'react-bootstrap';
+import { useState } from 'react';
+>>>>>>> Stashed changes
 
 var id = 0;
 console.log("SendRequestPage.js");
@@ -33,10 +38,14 @@ const SeatRequestPage = () => {
     const building = history.location.data;
     console.log(building);
     var seats;
+    const [seaters, setSeaters] = useState();
+    const [availableSeaters, setAvailableSeaters] = useState([]);
     var availableSeats = [];
 
+    
+
     GetDocument("Spaces", building).then(data => {
-      seats = data.Floors.reduce((previousValue, currentValue) => 
+        seats = data.Floors.reduce((previousValue, currentValue) => 
         previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
       );
       console.log("Seats: " + seats);
@@ -82,10 +91,14 @@ const SeatRequestPage = () => {
     return (
         <div>
             <Header tokens={userTokenCount} user={userDisplayname}/>
+          <Button variant="info" onClick={e => {
+                    setSeaters(seats);
+                    setAvailableSeaters(availableSeats)}}>refresh</Button>
+            <Header />
             <div >
-                <h3>[{seats}] seats soon to be available at {building} </h3>
+                <h3>[{seaters}] seats soon to be available at {building} </h3>
             </div>
-            {availableSeats.map((obj)=> (
+            {availableSeaters.map((obj)=> (
                 <AvailableSeat key={obj.id} availableSeat={obj}/>
             ))}
 

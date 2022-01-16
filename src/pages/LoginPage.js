@@ -17,7 +17,7 @@ const LoginPage = () => {
         <div>
             <div style={{marginRight: 400,
     marginLeft: 400,textAlign:'Center',marginTop: 200}}>
-        <h2 >Do you want to sit or what</h2></div>
+        <h2 >Do you want to sit or what?</h2></div>
             
             <div style={{marginRight: 400,
     marginLeft: 400,textAlign:'Center', marginTop: 0,paddingTop: 10,
