@@ -3,14 +3,10 @@ import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
 import {GetDocument} from "../firebase.js"
-<<<<<<< Updated upstream
 import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
 import React, { useState } from "react";
 import { getAuth } from 'firebase/auth';
-=======
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
->>>>>>> Stashed changes
 
 var id = 0;
 console.log("SendRequestPage.js");
