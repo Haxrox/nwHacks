@@ -26,8 +26,7 @@ const borderStyles = {
 
         marginRight: 0,
         marginLeft: 0,
-        marginTop: 10,
-        paddingTop: 10,
+        paddingTop: 20,
         paddingBottom: 1,
         backgroundColor: '#4169E1',
         borderRadius: 0,

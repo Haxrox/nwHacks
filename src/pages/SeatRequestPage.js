@@ -96,12 +96,12 @@ const SeatRequestPage = () => {
             <br></br>
             <Container  fluid="md">
                 <Row >
-                    <Col>
+                    <Col md="9">
                     <Button className='full-width-btn' variant="info" onClick={e => {
                     setSeaters(seats);
                     setAvailableSeaters(availableSeats)}}><FaRedo /></Button>
                     </Col>
-                    <Col>
+                    <Col md="3">
                     <Button className='full-width-btn' variant="danger" onClick={e => {
                     history.push("/home")}}>Cancel</Button>
                     </Col>

@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
 import { getAuth } from 'firebase/auth'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function parseBuildings(snapshot) {
     const data = [];
@@ -67,40 +70,49 @@ const Home = () => {
     }
     
     return (
-        <div>
+        <div className="home-body">
         <div>
             <Header tokens={userTokenCount} user={userDisplayname}/>
         </div>
-            <br></br>
-            <br></br>
-            <div style={{textAlign:"Center",}}>
-                <Form.Control as="select" 
-                    value={location}
-                    onChange={e => {
-                        setLocation(e.target.value);
-                    }}>
-                    {
-                    buildings
-                    /*
-                    <option>Which building bro?</option>
-                    <option value="1">IKB</option>
-                    <option value="2">Koerner</option>
-                    <option value="3">Nest</option>
-                    <option value="4">LIFE</option>
-                    */
-                    }
-                </Form.Control>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <Button variant="primary" onClick={handleRequestor}>I want a seat</Button>
-            <br></br>
-            <br></br>
-            <Button variant="info" onClick={handleResponder}>I can give a seat</Button>
+        <Container className="col-sm-" fluid="md">
+                <Row>
+                    <Col>
+                    <br></br>
+                        <div style={{textAlign:"Center",}}>
+                            <Form.Control as="select" 
+                                value={location}
+                                onChange={e => {
+                                setLocation(e.target.value);
+                                }}>
+                                {
+                        buildings
+                        /*
+                        <option>Which building bro?</option>
+                        <option value="1">IKB</option>
+                        <option value="2">Koerner</option>
+                        <option value="3">Nest</option>
+                        <option value="4">LIFE</option>
+                        */
+                        }
+                    </Form.Control>
+                    </div>  
+                    </Col>
+                </Row>
+                <Row className="margin-top">
+                    <Row >
+                        <Col> 
+                            <Button className="full-width-btn want-seat" variant="primary" onClick={handleRequestor}>I want a seat</Button>
+                        </Col>
+                    </Row>
+                    <Row className="margin-between">
+                    <Col >
+                        <Button className="full-width-btn give-seat" variant="info" onClick={handleResponder}>I can give a seat</Button>
+                    </Col>
+                    </Row>
+                </Row>
 
-            </div>            
+            </Container>
+            <footer></footer>      
         </div>
     )
 }
