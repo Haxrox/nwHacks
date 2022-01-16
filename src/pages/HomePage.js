@@ -3,7 +3,8 @@ import Form from "react-bootstrap/Form"
 import Button from 'react-bootstrap/Button'
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
+import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
+import { getAuth } from 'firebase/auth'
 
 function parseBuildings(snapshot) {
     const data = [];
@@ -46,11 +47,29 @@ const Home = () => {
             data: location
         });
     }
+
+    
+    const [userTokenCount, setUserTokenCount] = useState('')
+    var userDisplayname = "not logged in user"
+    const auth = getAuth()
+    const db = getFirestore()
+    if (auth.currentUser) {
+        const docRef = doc(db, "Users", auth.currentUser.uid); 
+        getDoc(docRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                console.log(docSnap.data().TokenCount.toString())
+                setUserTokenCount(docSnap.data().TokenCount.toString())
+            } else {
+                console.log("User does not exist") 
+            }
+        })
+        userDisplayname = auth.currentUser.displayName
+    }
     
     return (
         <div>
         <div>
-            <Header tokens="3" user="Johnny"/>
+            <Header tokens={userTokenCount} user={userDisplayname}/>
         </div>
             <br></br>
             <br></br>

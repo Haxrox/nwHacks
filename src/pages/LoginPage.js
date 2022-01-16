@@ -1,19 +1,23 @@
 import Header from '../components/Header'
 import Login from '../components/Login'
 import { setState, useState } from 'react'
+import { getAuth } from 'firebase/auth'
+import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
 
 const LoginPage = () => {
-
-    const [user, setUser] = useState('')
-    const getUser = (user) => {
-        setUser(user)
-        console.log("Login page got: ", user)
+    const [userTokenCount, setUserTokenCount] = useState('')
+    const [userDisplayname, setUserDisplayName] = useState("not logged in user")    
+    const childSetUserTokenCount = (tokenCount) => {
+        setUserTokenCount(tokenCount)
+    }
+    const childsetUserDisplayName = (displayName) => {
+        setUserDisplayName(displayName)
     }
 
     return (
         <div>
-            <Header />
-            <Login getUser={getUser}/>
+            <Header tokens={userTokenCount} user={userDisplayname}/>
+            <Login setUserDisplayName={setUserDisplayName} setUserTokenCount={setUserTokenCount}/>
         </div>
     )
 }
