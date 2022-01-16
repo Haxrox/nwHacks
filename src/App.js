@@ -4,8 +4,7 @@ import Header from './components/Header.js';
 import SeatRequestPage from './components/SeatRequestPage.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage"
-import LoginPage from "./components/LoginPage.js"
-import Login from "./components/Login"
+
 import {useState} from 'react'
 import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
 import { Routes } from './Routes';

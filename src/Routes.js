@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import  Home  from "./pages/HomePage.js";
 import AvailableSeats  from "./components/AvailableSeats.js";
+import LoginPage from "./pages/LoginPage.js";
 
 /**
  * We use the react-router-dom library to simplify routing in our application.
@@ -24,6 +25,7 @@ export const Routes = () => {
 
         <Route exact path="/home" component={Home} />
         <Route exact path="/request" component={AvailableSeats} />
+        <Route exact path="/login" component={LoginPage} />
       </Switch>
     </BrowserRouter>
   );
