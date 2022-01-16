@@ -9,7 +9,7 @@ const WaitPage = () => {
     const history = useHistory();
     const handleCancel = () => {
         //add backend to delete/cancel current response from database
-        history.push("/respond")};
+        history.push("/home")};
 
     return (
         <div>
