@@ -36,7 +36,6 @@ function App() {
 
     <div className="App">
       <Routes/>
-    <SeatRequestPage availableSeats={availableSeats}/>
     </div>
   );
 }
