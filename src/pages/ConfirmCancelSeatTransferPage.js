@@ -17,7 +17,9 @@ const ConfirmCancelSeatTransferPage = () => {
 
     console.log(history.location);
     UpdateDocument(history.location.building, "Requesters", {
-        [history.location.data.responder]: auth.currentUser.uid
+        [history.location.data.userData.uid]: {
+            responder: auth.currentUser.uid
+        }
     });
     const handleConfirm = () => {
         history.push("/home")
