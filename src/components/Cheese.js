@@ -39,10 +39,9 @@ const handleLogin = () => {
 
         console.log("Token: " + token); 
         console.log("Credential: " + JSON.stringify(credential));
-        console.log("User: " + JSON.stringify(user));
+        console.log("User: " + user.uid);
 
-        this.userDetails = JSON.parse(JSON.stringify(credential));
-        localStorage.setItem('Author', this.userDetails?.id);
+        localStorage.setItem('Author', user.uid);
         // ...
     }).catch((error) => {
         // Handle Errors here.
