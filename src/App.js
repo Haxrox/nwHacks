@@ -5,6 +5,7 @@ import SeatRequestPage from './components/SeatRequestPage.js';
 import Cheese from './components/Cheese.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./components/HomePage"
+import LoginPage from "./components/LoginPage.js"
 import Login from "./components/Login"
 import {useState} from 'react'
 import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
@@ -45,6 +46,7 @@ function App() {
 
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/kimchi" component={Header} />
+        <Route exact path="/login" component={LoginPage} />
 
       </Switch>
     </BrowserRouter>

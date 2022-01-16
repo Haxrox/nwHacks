@@ -1,13 +1,20 @@
 // import firestore from '../firebase.js';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { GoogleLogin } from 'react-google-login';
+const authConfiguration = require("../config/authConfig.json");
 
 
 const Cheese = ({text}) => {
-
     return (
         <div>
-            <button onClick={handleLogin}>Login with Google</button>            
+            <GoogleLogin
+            clientId={authConfiguration.CLIENT_ID}
+            buttonText="Log in with Google"
+            onSuccess={handleLogin}
+            onFailure={handleLogin}
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+/>
         </div>
     )
 }
@@ -29,6 +36,12 @@ const handleLogin = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+
+        console.log("Token: " + token); 
+        console.log("Credential: " + JSON.stringify(credential));
+        console.log("User: " + user.uid);
+
+        localStorage.setItem('Author', user.uid);
         // ...
     }).catch((error) => {
         // Handle Errors here.
@@ -39,6 +52,11 @@ const handleLogin = () => {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
+
+        console.log("ErrorCode: " + errorCode);
+        console.log("ErrorMessage: " + errorMessage);
+        console.log("Email: " + email);
+        console.log("Credential: " + credential);
     });
 }
 
