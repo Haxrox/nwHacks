@@ -14,7 +14,7 @@ function parseBuildings(snapshot) {
         const freeSeats = doc.data().Floors.reduce((previousValue, currentValue) => 
             previousValue.Seats.filter(seat => !seat.Occupied).length + currentValue.Seats.filter(seat => !seat.Occupied).length
         );
-        data.push(<option value={doc.id} key={doc.id}>{doc.id} [{freeSeats/totalSeats}]</option>);
+        data.push(<option value={doc.id} key={doc.id}>{doc.id} [{freeSeats}/{totalSeats}]</option>);
     });
     return data;
   }
