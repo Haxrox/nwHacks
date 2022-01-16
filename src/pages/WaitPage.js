@@ -11,7 +11,6 @@ const WaitPage = () => {
 
     const history = useHistory();
     const location = history.location.data;
-    console.log("WaitPage" + location);
 
     const auth = getAuth();
     Listen(doc(Firestore, location, "Requesters"), "requestersUpdated", (data => {
