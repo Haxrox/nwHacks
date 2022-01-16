@@ -30,7 +30,7 @@ const LeavePage = () => {
                 rows="1"
                 placeholder="Leaving In..."
                 value={leaveIn}
-                type="text"
+                type="number"
                 onChange={e => {
                     setLeaveIn(e.target.value);
                   }}/>
@@ -44,7 +44,7 @@ const LeavePage = () => {
                 rows="1"
                 placeholder="Additional wait..."
                 value={tolerance}
-                type="text"
+                type="number"
                 onChange={e => {
                     setTolerance(e.target.value);
                   }}/>      
@@ -57,7 +57,7 @@ const LeavePage = () => {
                 rows="1"
                 placeholder="Where am I sitting"
                 value={address}
-                type="text"
+                type="number"
                 onChange={e => {
                     setAddress(e.target.value);
                   }}/>       
