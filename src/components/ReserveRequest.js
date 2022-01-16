@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+
+
 
 const ReserveRequest = ({tokenCost}) => {
+
+    const history = useHistory();
+    const handleReserve = () => {
+        //handle reserve, matach made backend
+        history.push("/confirm");
+    }
     return (
         <div>
            
            <div>
                <p>Cost: {tokenCost} token(s)</p>
            </div>
-           <Button className='reserve-btn' variant="primary">Reserve Now</Button>
+           <Button className='reserve-btn' variant="primary" onClick={handleReserve}>Reserve Now</Button>
         </div>
     )
 }
