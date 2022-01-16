@@ -2,10 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header.js';
 import SeatRequestPage from './components/SeatRequestPage.js';
-import Cheese from './components/Cheese.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import HomePage from "./components/HomePage"
-import Login from "./components/Login"
+import HomePage from "./pages/HomePage"
+
 import {useState} from 'react'
 import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
 
