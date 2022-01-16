@@ -2,15 +2,33 @@ import Header from '../components/Header'
 import AvailableSeat from '../components/AvailableSeat'
 import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
-import {collection, getDocs, query, onSnapshot, getFirestore } from "firebase/firestore"
 import {GetDocument} from "../firebase.js"
+import {collection, getDoc, getDocs, doc, query, onSnapshot, getFirestore } from "firebase/firestore"
+import React, { useState } from "react";
+import { getAuth } from 'firebase/auth';
 
 var id = 0;
 console.log("SendRequestPage.js");
 
 const SeatRequestPage = () => {
 
-    
+    const [userTokenCount, setUserTokenCount] = useState('')
+    const [userDisplayname, setUserDisplayname] = useState("not logged in user")
+    const auth = getAuth()
+    const db = getFirestore()
+    if (auth.currentUser) {
+        const docRef = doc(db, "Users", auth.currentUser.uid); 
+        getDoc(docRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                console.log(docSnap.data().TokenCount.toString())
+                setUserTokenCount(docSnap.data().TokenCount.toString())
+            } else {
+                console.log("User does not exist") 
+            }
+        })
+        setUserDisplayname(auth.currentUser.displayName)
+    }  
+  
     const history = useHistory();
     const building = history.location.data;
     console.log(building);
@@ -63,7 +81,7 @@ const SeatRequestPage = () => {
       */
     return (
         <div>
-            <Header />
+            <Header tokens={userTokenCount} user={userDisplayname}/>
             <div >
                 <h3>[{seats}] seats soon to be available at {building} </h3>
             </div>
